@@ -1,6 +1,7 @@
 package com.cloris.day3;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 /*
 计算从键盘输入的字符串中各个字母出现的次数
@@ -10,9 +11,15 @@ public class Topic1 {
 
     public static void main(String[] args) {
 
-        String str1 = "abcdefghijklm";
+//        String str1 = "abcdefghijklm";
+        Scanner scan = new Scanner(System.in);
+        System.out.println("请输入需要统计的字符串：");
 
-        char[] arr = str1.toCharArray();
+
+        String str = scan.nextLine();
+
+
+        char[] arr = str.toCharArray();
 
 
         HashMap<Character,Integer> hm = new HashMap<>();
