@@ -1,51 +1,47 @@
 package com.cloris.day3;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-/*
-定义一个Map,key是userId，value是User，要求遍历整个map数据
-User{String userid,String name,int age,Map<String,List<String>>hobby}
-
-
- */
-@Setter
-@Getter
-@ToString
 @Log
-public class Topic3 extends Object {
-
-    private String userId,userName;
-    private Integer age;
-
-    private Map<String,List<String>> hobby;
-
-    public Topic3(int age,String userId,String userName,Map<String,List<String>> hobby){
-        this.age = age;
-        this.userId = userId;
-        this.userName = userName;
-        this.hobby = hobby;
-
-    }
-
-
+public class Topic3 {
 
     public static void main(String[] args) {
+        Map<String, User> userMap = Topic2.getUserMap();
+        String group1 = "青年";
+        String group2 = "中年";
+        String group3 = "老年";
 
-        HashMap<String,List<String>> hobby1 = new HashMap<>();
-        List<String> firstUserHobbyList = new ArrayList<>(Arrays.asList("文学","艺术","科幻"));
-        hobby1.put("电影",firstUserHobbyList);
-        Topic3 firstUser = new Topic3(28,"001","张三",hobby1);
-        log.info(firstUser.toString());
+        Map<String, List<User>> groupMap = new HashMap<>();
+        groupMap.put(group1, new ArrayList<User>());
+        groupMap.put(group2, new ArrayList<User>());
+        groupMap.put(group3, new ArrayList<User>());
+
+        //分组
+        String group = "";
+        for(Map.Entry<String, User> entry : userMap.entrySet()){
+            if(entry.getValue().getAge() < 20){
+                group = group1;
+            }else if(entry.getValue().getAge() < 30){
+                group = group2;
+            }else{
+                group = group3;
+            }
+            groupMap.get(group).add(entry.getValue());
+        }
+
+        log.info(groupMap.toString());
+
+        //遍历
+        for(Map.Entry<String, List<User>> entry : groupMap.entrySet()){
+            log.info("分组: " + entry.getKey());
+            for(User user : entry.getValue()){
+                log.info("user: " + user);
+            }
+        }
 
     }
-
-
-
 }
